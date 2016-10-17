@@ -1,0 +1,21 @@
+﻿{
+    "app": {
+        "port": 3000
+    },
+    "db": {
+        "host": "127.0.0.1",
+        "database": "JustOrderAndEat",
+        "username": "root",
+        "password": "rahul"
+    },
+    "api": {
+        "username": "localhost",
+        "password": 6379
+    },
+    "jwt": {
+        "secret": "apiJustOrderAndEat"
+    },
+    "mongo": {
+        "database": "mongodb://localhost:27017/JustOrderAndEat"
+    }
+}
