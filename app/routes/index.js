@@ -2,6 +2,7 @@ var changeCase = require('change-case');
 var express = require('express');
 var routes = require('require-dir')();
 var config = require('nconf');
+var User = require('../models/api_user'); // get our mongoose model
 
 module.exports = function(app) {
   'use strict';
