@@ -9,8 +9,8 @@
         "password": "rahul"
     },
     "api": {
-        "username": "localhost",
-        "password": 6379
+        "username": "rahul",
+        "password": "srivastava"
     },
     "jwt": {
         "secret": "apiJustOrderAndEat"

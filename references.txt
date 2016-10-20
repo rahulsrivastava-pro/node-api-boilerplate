@@ -70,3 +70,9 @@ https://blog.risingstack.com/node-js-best-practices/
 https://expressjs.com/en/advanced/best-practice-performance.html
 
 
+--------------------------------------------------------------------
+
+help for swagger api 
+
+http://mherman.org/blog/2016/05/26/swagger-and-nodejs/#.WAf5ROCGOhd
+

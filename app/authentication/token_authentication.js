@@ -7,7 +7,6 @@ var User = require('../models/api_user'); // get our mongoose model
 module.exports = function (apiRoutes) {
   'use strict';
  
-
   apiRoutes.post('/authenticate', function (req, res) {
 
       // find the user

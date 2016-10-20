@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var logger = require('winston');
 var mongoose = require('mongoose');
+
 var app;
 
 var start =  function(cb) {
@@ -19,22 +20,19 @@ var start =  function(cb) {
 
   app.use(morgan('common'));
   app.use(bodyParser.urlencoded({extended: true}));
-  app.use(bodyParser.json({type: '*/*'}));
+  app.use(bodyParser.json({ type: '*/*' }));
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  app.use(express.static(__dirname + '/public'));
+
+
   mongoose.connect(config.get('mongo:database'));
 
   logger.info('[SERVER] Initializing routes');
 
   require('../app/routes/index.js')(app);
 
-  // Error handler
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({
-      message: err.message,
-      error: (app.get('env') === 'development' ? err : {})
-    });
-    next(err);
-  });
 
 // =======================
 // start the server ======
