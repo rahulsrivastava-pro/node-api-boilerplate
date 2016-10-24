@@ -10,14 +10,20 @@ var swaggerJSDoc = require('swagger-jsdoc');
 // swagger api documentation ================
 // =======================
 
+var bearerDefinition = {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'Header'
+        }
+
 var swaggerDefinition = {
     info: {
-        title: 'Node Swagger API',
+        title: 'Just Order And Eat',
         version: '1.0.0',
-        description: 'Demonstrating how to describe a RESTful API with Swagger',
+        description: 'APIs exposed for the Platform : Just Order And Eat',
     },
-    host: 'localhost:4000',
-    basePath: '/',
+    host: config.get('app:domain') + ':' + config.get('NODE_PORT'),
+    basePath: '/'
 };
 
 // options for the swagger docs
@@ -25,19 +31,16 @@ var options = {
     // import swaggerDefinitions
     swaggerDefinition: swaggerDefinition,
     // path to the API docs
-    apis: ['./app/routes/*.js', './app/authentication/*.js'],
+    apis: ['./app/specs/*.js'],
 };
-
 // initialize swagger-jsdoc
 var swaggerSpec = swaggerJSDoc(options);
 
+swaggerSpec.securityDefinitions["jsonWebToken"] = bearerDefinition;
 
 // =======================
 // swagger api documentation ================
 // =======================
-
-
-
 
 module.exports = function(app) {
   'use strict';
@@ -47,14 +50,9 @@ module.exports = function(app) {
     // =======================
     // basic route
 
-
-    
-
       app.get('/', function (req, res) {
           res.send('Hello! The API is at http://localhost:' + config.get('NODE_PORT') + '/api');
       });
-
-
 
       app.get('/setup', function (req, res) {
 
@@ -83,7 +81,7 @@ module.exports = function(app) {
 
     //List your routes over here
     //1. authentication
-    require('../authentication/token_authentication')(apiRoutes);
+    require('./auth.js')(apiRoutes);
 
     //2. order-status
     require('./orderStatus.js')(apiRoutes);
@@ -93,11 +91,9 @@ module.exports = function(app) {
 
     // route to show a random message (GET http://localhost:4000/api/)
 
-
     apiRoutes.get('/', function (req, res) {
         res.json({ message: 'Welcome to the coolest API on earth!' });
     });
-
 
     // serve swagger
     app.get('/swagger.json', function (req, res) {

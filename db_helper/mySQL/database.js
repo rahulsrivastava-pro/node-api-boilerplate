@@ -37,7 +37,7 @@ var validate = function (cb) {
 
   connection.connect(function(err) {
       if (err) {
-          console.log(config.get('db:host'));
+         // console.log(config.get('db:host'));
       console.log('error occured while connecting to the database.')
       console.log(err.code); // 'ECONNREFUSED'
       console.log(err.fatal); // true

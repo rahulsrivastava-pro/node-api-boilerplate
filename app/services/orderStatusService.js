@@ -13,11 +13,25 @@ var getOrderStatusById = function (id) {
     var queryString = 'SELECT * FROM OrderStatus WHERE OrderStatusId = ? LIMIT 1;';
     return db.query(mysql.format(queryString, params)).then(function (r) {
         return r;
+    }).catch(function (e) {
+        return "Error Occured while selecting Order Status : " + e.message ;
+    });
+}
+
+var createOrderStatus = function (name, isactive) {
+    var params = [name, isactive];
+    var queryString = 'Insert into OrderStatus (OrderStatusName, IsActive) Values (?, ?);';
+    console.log(mysql.format(queryString, params));
+    return db.query(mysql.format(queryString, params)).then(function (r) {
+        return "Order Status Created";
+    }).catch(function (e) {
+        return "Error Occured while inserting Order Status : " + e.message;
     });
 }
 
 module.exports = {
     getOrderStatus: getOrderStatus,
-    getOrderStatusById: getOrderStatusById
+    getOrderStatusById: getOrderStatusById,
+    createOrderStatus: createOrderStatus
 };
 
